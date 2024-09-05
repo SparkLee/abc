@@ -1,1 +1,0 @@
-import{_ as o,r as a,o as s,c as r,a as n,w as c,b as _}from"./index-Cnjt5rk0.js";const d={},i={class:"row"};function f(l,e){const t=a("t-button");return s(),r("div",i,[n(t,{size:"large",theme:"primary",variant:"dashed"},{default:c(()=>e[0]||(e[0]=[_("虚框按钮")])),_:1})])}const p=o(d,[["render",f],["__scopeId","data-v-ec08009f"]]);export{p as default};
