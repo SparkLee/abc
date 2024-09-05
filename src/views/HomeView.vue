@@ -1,6 +1,7 @@
 <template>
+  <t-divider dashed content="alligator" />
+  <br/>
   <div class="row">
-    <t-divider content="alligator" />
     <t-button @click="goToYouglish" size="large" theme="primary" variant="dashed">alligator【看视频】</t-button>
     <t-button @click="goToBingImg" size="large" theme="primary" variant="dashed">alligator【看图片】</t-button>
     <t-button @click="goToBaiduFanYi" size="large" theme="primary" variant="dashed">alligator【查词典】</t-button>
