@@ -1,15 +1,23 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+    <div class="row">
+      <t-button size="large" theme="primary" variant="dashed">虚框按钮</t-button>
+    </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+<style scoped lang="less">
+.row {
+  display: flex;
+  padding: 0 16px;
+}
+
+.row + .row {
+  margin-top: 16px;
+}
+
+.t-button + .t-button {
+  margin-left: 16px;
 }
 </style>
+
+<script setup lang="ts">
+</script>
