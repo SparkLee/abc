@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <title>英语学习</title>
-</head>
-<body>
-<h1><a href="https://youglish.com/pronounce/alligator/english">alligator【看视频】</a></h1>
-<h1><a href="https://www.bing.com/images/search?q=alligator&first=1">alligator【看图片】</a></h1>
-<h1><a href="https://fanyi.baidu.com/#en/zh/alligator">alligator【查词典】</a></h1>
-<h1 id="app"></h1>
-<script>
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://httpbin.org/get', true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById('app').innerHTML = xhr.responseText;
-        }
-    };
-    xhr.send();
-</script>
-</body>
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
