@@ -27,24 +27,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
-        run: pnpm build
+      - name: Install and Build
+        run: |
+          npm install -g pnpm
+          pnpm install
+          pnpm build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages # 部署到的分支
-          folder: dist # 假设你的构建输出在dist文件夹
-          clean: true # 在部署前清理gh-pages分支
-          singleCommit: true # 创建一个单一的提交而不是多个提交
+          folder: dist
