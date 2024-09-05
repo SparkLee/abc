@@ -1,26 +1,16 @@
 <template>
+  <h1 style="text-align: center; color: red;">My ABC</h1>
+  <br />
   <t-divider dashed content="alligator" />
-  <br/>
-  <div class="row">
-    <t-button @click="goToYouglish" size="large" theme="primary" variant="dashed">alligator【看视频】</t-button>
-    <t-button @click="goToBingImg" size="large" theme="primary" variant="dashed">alligator【看图片】</t-button>
-    <t-button @click="goToBaiduFanYi" size="large" theme="primary" variant="dashed">alligator【查词典】</t-button>
-  </div>
+  <br />
+  <t-button @click="goToYouglish" size="large" theme="primary" variant="dashed">alligator【看视频】</t-button>
+  <br />
+  <t-button @click="goToBingImg" size="large" theme="primary" variant="dashed">alligator【看图片】</t-button>
+  <br />
+  <t-button @click="goToBaiduFanYi" size="large" theme="primary" variant="dashed">alligator【查词典】</t-button>
 </template>
 
 <style scoped lang="less">
-.row {
-  display: flex;
-  padding: 0 16px;
-}
-
-.row + .row {
-  margin-top: 16px;
-}
-
-.t-button + .t-button {
-  margin-left: 16px;
-}
 </style>
 
 <script setup lang="ts">
