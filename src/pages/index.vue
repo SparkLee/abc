@@ -15,16 +15,31 @@
       :location="$vuetify.display.mobile ? 'bottom' : undefined"
       temporary
     >
-      <v-list :items="items"></v-list>
+      <v-list :items="menus"></v-list>
     </v-navigation-drawer>
 
-    <v-main style="height: 800px;">
-      <v-card-text>
-        中华人民共和国
-        <v-btn variant="outlined">Button</v-btn>
-      </v-card-text>
+    <v-main style="height: 1800px; margin: 30px;">
+      <v-row>
+        <v-col cols="12" md="4" v-for="(item, index) in items">
+          <v-card :title="(index + 1) + '. ' + item">
+            <v-card-actions>
+              <v-btn @click.prevent="goToYouglish(item)" variant="outlined" color="red">
+                <v-icon icon="mdi-video" size="x-large" start></v-icon>
+                看视频
+              </v-btn>
+              <v-btn @click.prevent="goToBingImg(item)" variant="outlined" color="blue">
+                <v-icon icon="mdi-image-area" size="x-large" start></v-icon>
+                看图片
+              </v-btn>
+              <v-btn @click.prevent="goToBaiduFanYi(item)" variant="outlined" color="teal-lighten-2">
+                <v-icon icon="mdi-library" size="x-large" start></v-icon>
+                查词典
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-main>
-
   </v-layout>
 </template>
 
@@ -33,7 +48,7 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
-    items: [
+    menus: [
       {
         title: 'Foo',
         sum: 666,
@@ -54,8 +69,23 @@ export default {
         sum: 444,
         value: 'buzz'
       }
-    ]
+    ],
+    items: ['alligator', 'are you ok', 'mooncake', 'bridesmaid', 'leopard', 'Jesus', 'parrot']
   }),
+
+  methods: {
+    goToYouglish(content) {
+      window.open('https://youglish.com/pronounce/' + encodeURIComponent(content) + '/english', '_blank')
+    },
+
+    goToBingImg(content) {
+      window.open('https://www.bing.com/images/search?q=' + encodeURIComponent(content), '_blank')
+    },
+
+    goToBaiduFanYi(content) {
+      window.open('https://fanyi.baidu.com/#en/zh/' + encodeURIComponent(content), '_blank')
+    }
+  },
 
   watch: {
     group() {
