@@ -22,15 +22,18 @@
         <v-col cols="12" md="4" v-for="(item, index) in items">
           <v-card :title="(index + 1) + '. ' + item">
             <v-card-actions>
-              <v-btn @click.prevent="goToYouglish(item)" class="text-caption" color="red" density="comfortable" border="dashed thin" rounded="0">
+              <v-btn @click.prevent="goToYouglish(item)" class="text-caption" color="red" density="comfortable"
+                     border="dashed thin" rounded="0">
                 <v-icon icon="mdi-video" size="small"></v-icon>
                 看视频
               </v-btn>
-              <v-btn @click.prevent="goToBingImg(item)" class="text-caption" color="blue" density="comfortable" border="dashed thin" rounded="0">
+              <v-btn @click.prevent="goToBingImg(item)" class="text-caption" color="blue" density="comfortable"
+                     border="dashed thin" rounded="0">
                 <v-icon icon="mdi-image-area" size="small"></v-icon>
                 看图片
               </v-btn>
-              <v-btn @click.prevent="goToBaiduFanYi(item)" class="text-caption" color="teal-lighten-2" density="comfortable"
+              <v-btn @click.prevent="goToBaiduFanYi(item)" class="text-caption" color="teal-lighten-2"
+                     density="comfortable"
                      border="dashed thin" rounded="0">
                 <v-icon icon="mdi-library" size="small"></v-icon>
                 查词典
@@ -71,15 +74,15 @@ const menus = ref([
   }
 ])
 
-function goToYouglish(content) {
+function goToYouglish(content: string) {
   window.open('https://youglish.com/pronounce/' + encodeURIComponent(content) + '/english', '_blank')
 }
 
-function goToBingImg(content) {
+function goToBingImg(content: string) {
   window.open('https://www.bing.com/images/search?q=' + encodeURIComponent(content), '_blank')
 }
 
-function goToBaiduFanYi(content) {
+function goToBaiduFanYi(content: string) {
   window.open('https://fanyi.baidu.com/#en/zh/' + encodeURIComponent(content), '_blank')
 }
 </script>
