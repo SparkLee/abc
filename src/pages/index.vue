@@ -22,16 +22,16 @@
         <v-col cols="12" md="4" v-for="(item, index) in items">
           <v-card :title="(index + 1) + '. ' + item">
             <v-card-actions>
-              <v-btn @click.prevent="goToYouglish(item)" variant="outlined" color="red">
-                <v-icon icon="mdi-video" size="x-large" start></v-icon>
+              <v-btn @click.prevent="goToYouglish(item)" variant="outlined" color="red" density="comfortable">
+                <v-icon icon="mdi-video" size="small"></v-icon>
                 看视频
               </v-btn>
-              <v-btn @click.prevent="goToBingImg(item)" variant="outlined" color="blue">
-                <v-icon icon="mdi-image-area" size="x-large" start></v-icon>
+              <v-btn @click.prevent="goToBingImg(item)" variant="outlined" color="blue" density="comfortable">
+                <v-icon icon="mdi-image-area" size="small"></v-icon>
                 看图片
               </v-btn>
-              <v-btn @click.prevent="goToBaiduFanYi(item)" variant="outlined" color="teal-lighten-2">
-                <v-icon icon="mdi-library" size="x-large" start></v-icon>
+              <v-btn @click.prevent="goToBaiduFanYi(item)" variant="outlined" color="teal-lighten-2" density="comfortable">
+                <v-icon icon="mdi-library" size="small"></v-icon>
                 查词典
               </v-btn>
             </v-card-actions>
