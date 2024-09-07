@@ -69,7 +69,7 @@ export default {
         value: 'buzz'
       }
     ],
-    items: ['alligator', 'are you ok', 'mooncake', 'bridesmaid', 'leopard', 'Jesus', 'parrot']
+    items: ['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry']
   }),
 
   methods: {
