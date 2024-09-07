@@ -12,13 +12,12 @@
 
     <v-navigation-drawer
       v-model="drawer"
-      :location="$vuetify.display.mobile ? 'bottom' : undefined"
       temporary
     >
       <v-list :items="menus"></v-list>
     </v-navigation-drawer>
 
-    <v-main style="height: 1800px; margin: 30px;">
+    <v-main style="min-height: 400px; margin: 30px;">
       <v-row>
         <v-col cols="12" md="4" v-for="(item, index) in items">
           <v-card :title="(index + 1) + '. ' + item">
