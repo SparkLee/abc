@@ -30,7 +30,8 @@
                 <v-icon icon="mdi-image-area" size="small"></v-icon>
                 看图片
               </v-btn>
-              <v-btn @click.prevent="goToBaiduFanYi(item)" variant="outlined" color="teal-lighten-2" density="comfortable">
+              <v-btn @click.prevent="goToBaiduFanYi(item)" variant="outlined" color="teal-lighten-2"
+                     density="comfortable">
                 <v-icon icon="mdi-library" size="small"></v-icon>
                 查词典
               </v-btn>
@@ -42,54 +43,43 @@
   </v-layout>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    drawer: false,
-    group: null,
-    menus: [
-      {
-        title: 'Foo',
-        sum: 666,
-        value: 'foo'
-      },
-      {
-        title: 'Bar',
-        sum: 888,
-        value: 'bar'
-      },
-      {
-        title: 'Fizz',
-        sum: 999,
-        value: 'fizz'
-      },
-      {
-        title: 'Buzz',
-        sum: 444,
-        value: 'buzz'
-      }
-    ],
-    items: ['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry']
-  }),
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-  methods: {
-    goToYouglish(content) {
-      window.open('https://youglish.com/pronounce/' + encodeURIComponent(content) + '/english', '_blank')
-    },
-
-    goToBingImg(content) {
-      window.open('https://www.bing.com/images/search?q=' + encodeURIComponent(content), '_blank')
-    },
-
-    goToBaiduFanYi(content) {
-      window.open('https://fanyi.baidu.com/#en/zh/' + encodeURIComponent(content), '_blank')
-    }
+const drawer = ref(false)
+const items = ref(['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry'])
+const menus = ref([
+  {
+    title: 'Foo',
+    sum: 666,
+    value: 'foo'
   },
-
-  watch: {
-    group() {
-      this.drawer = false
-    }
+  {
+    title: 'Bar',
+    sum: 888,
+    value: 'bar'
+  },
+  {
+    title: 'Fizz',
+    sum: 999,
+    value: 'fizz'
+  },
+  {
+    title: 'Buzz',
+    sum: 444,
+    value: 'buzz'
   }
+])
+
+function goToYouglish(content) {
+  window.open('https://youglish.com/pronounce/' + encodeURIComponent(content) + '/english', '_blank')
+}
+
+function goToBingImg(content) {
+  window.open('https://www.bing.com/images/search?q=' + encodeURIComponent(content), '_blank')
+}
+
+function goToBaiduFanYi(content) {
+  window.open('https://fanyi.baidu.com/#en/zh/' + encodeURIComponent(content), '_blank')
 }
 </script>
