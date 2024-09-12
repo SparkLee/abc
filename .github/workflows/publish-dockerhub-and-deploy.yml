@@ -27,7 +27,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Build docker image
-        run: docker-compose -f docker/docker-compose.yml build
+        run: docker compose -f docker/docker-compose.yml build
 
       - name: Push docker image to Docker Hub
         run: |
