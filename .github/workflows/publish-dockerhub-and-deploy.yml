@@ -47,9 +47,9 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v5.1.0
         with:
-          REMOTE_HOST: $SSH_REMOTE_HOST
-          REMOTE_USER: $SSH_REMOTE_USER
-          SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_114_132_232_154 }}
+          REMOTE_HOST: ${{ secrets.SSH_REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_REMOTE_USER }}
           # 其实只需要执行命令，无需 rsync 同步待部署文件，但是 ssh-deploy 插件中没有选项可以关闭 rsync，故同步一个小文件得了。
           SOURCE: 'dist/index.html'
           TARGET: '/tmp/dist'
