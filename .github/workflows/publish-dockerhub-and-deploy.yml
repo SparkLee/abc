@@ -44,9 +44,11 @@ jobs:
     needs: publish
     steps:
       - run: |
-          echo $SSH_REMOTE_HOST
-          echo $SSH_REMOTE_USER
-          echo $SSH_PRIVATE_KEY
+          echo $SSH_REMOTE_HOST > x
+          echo $SSH_REMOTE_USER >> x
+          echo $SSH_PRIVATE_KEY >> x
+          cat x
+          tree /home/runner/.ssh
       # https://github.com/marketplace/actions/ssh-deploy
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v5.1.0
