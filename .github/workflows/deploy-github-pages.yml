@@ -1,10 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
-  workflow_run:
-    workflows: ["Build and Upload Artifacts"]
-    #workflows: ["我依赖是一个不存在的 workflow 完成后才执行，用此方法禁用本 workflow！"]
-    types: [completed]
+  push:
+    branches: ["main"]
+    #branches: ["使用一个不存在的分支，相当于禁用本 workflow！"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -23,20 +22,17 @@ concurrency:
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-          # 若要下载其他workflow或其他仓库的artifact则必须指定github-token/run-id
-          github-token: ${{ github.token }}
-          run-id: ${{ github.event.workflow_run.id }}
+      # 不要用“pnpm build”，而应该用“pnpm build-github-pages”，因为发布到github pages后，使用github的自带域名是带有子目录的（https://sparklee.github.io/abc/）
+      - name: Install and Build
+        run: |
+          npm install -g pnpm
+          pnpm install
+          pnpm build-github-pages
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
