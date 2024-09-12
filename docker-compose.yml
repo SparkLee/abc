@@ -2,4 +2,4 @@ services:
   abc:
     image: "sparklee/abc:latest"
     build:
-      context: "."
+      context: .
