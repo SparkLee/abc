@@ -40,17 +40,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: publish
     steps:
-      - uses: actions/checkout@v4
-
       # https://github.com/marketplace/actions/ssh-deploy
       - name: Deploy to Server
+        # 注：传输的双方都必须安装 rsync，即 github ci机器和部署机器均需有rsync命令：https://www.ruanyifeng.com/blog/2020/08/rsync.html
         uses: easingthemes/ssh-deploy@v5.1.0
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_114_132_232_154 }}
           REMOTE_HOST: ${{ secrets.SSH_REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.SSH_REMOTE_USER }}
           # 其实只需要执行命令，无需 rsync 同步待部署文件，但是 ssh-deploy 插件中没有选项可以关闭 rsync，故同步一个小文件得了。
-          SOURCE: 'dist/index.html'
+          SOURCE: 'index.html'
           TARGET: '/tmp/dist'
           # Deployment Failed, Permission denied (publickey,password): This issue occures in some cases, it is related to OS and ssh.
           # This action can only provide a workaround: Use SCRIPT_BEFORE param, eg SCRIPT_BEFORE: ls. This will force known_hosts update
