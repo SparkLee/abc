@@ -2,8 +2,8 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    #branches: ["main"]
-    branches: ["使用一个不存在的分支，相当于禁用本 workflow！"]
+    branches: ["main"]
+    #branches: ["使用一个不存在的分支，相当于禁用本 workflow！"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
