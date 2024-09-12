@@ -8,9 +8,6 @@ on:
 
 env:
   DOCKERHUB_PAT: ${{ secrets.DOCKERHUB_PERSONAL_ACCESS_TOKEN }}
-  SSH_REMOTE_HOST: ${{ secrets.SSH_REMOTE_HOST }}
-  SSH_REMOTE_USER: ${{ secrets.SSH_REMOTE_USER }}
-  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_114_132_232_154 }}
 
 jobs:
   publish:
@@ -43,6 +40,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: publish
     steps:
+      - uses: actions/checkout@v4
+
       # https://github.com/marketplace/actions/ssh-deploy
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v5.1.0
