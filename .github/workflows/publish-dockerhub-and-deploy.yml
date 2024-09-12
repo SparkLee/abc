@@ -41,6 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: publish
     steps:
+      # github action的两个job之间不会共享文件，是两个独立的runner，此job即没有actions/checkout，也没有actions/download-artifact，故此job的当前工作目录是个空目录！
       - run: tree ./
 
       # https://github.com/marketplace/actions/ssh-deploy
@@ -50,7 +51,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_114_132_232_154 }}
           REMOTE_HOST: ${{ secrets.SSH_REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.SSH_REMOTE_USER }}
-          # 其实只需要执行命令，无需 rsync 同步待部署文件，但是 ssh-deploy 插件中没有选项可以关闭 rsync，故同步一个小文件得了。
+          # 其实只需要执行命令，无需 rsync 同步待部署文件，但是 ssh-deploy 插件中没有选项可以关闭 rsync，故同步空目录即可（github action的两个job之间不会共享文件，是两个独立的runner，故此job的当前工作目录是个空目录）。
           SOURCE: ''
           TARGET: '/tmp/dist'
           # Deployment Failed, Permission denied (publickey,password): This issue occures in some cases, it is related to OS and ssh.
