@@ -1,9 +1,10 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+  workflow_run:
+    workflows: ["Build and Upload Artifacts"]
+    #workflows: ["我依赖是一个不存在的 workflow 完成后才执行，用此方法禁用本 workflow！"]
+    types: [completed]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -21,19 +22,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install and Build
-        run: |
-          npm install -g pnpm
-          pnpm install
-          pnpm build
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist
+          branch: gh-pages
