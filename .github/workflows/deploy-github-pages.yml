@@ -31,8 +31,9 @@ jobs:
         with:
           name: dist
           path: dist/
-          # 若要下载其他workflow或其他仓库的artifact则必须指定github-token
+          # 若要下载其他workflow或其他仓库的artifact则必须指定github-token/run-id
           github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
