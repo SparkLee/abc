@@ -3,7 +3,7 @@ name: Publish to Docker Hub and Deploy to Server
 on:
   workflow_run:
     workflows: ["Build and Upload Artifacts"]
-    #workflows: ["我依赖是一个不存在的 workflow 完成后才执行，用此方法禁用本 workflow！"]
+    # workflows: ["我依赖是一个不存在的 workflow 完成后才执行，用此方法禁用本 workflow！"]
     types: [completed]
 
 env:
@@ -50,6 +50,9 @@ jobs:
           REMOTE_HOST: $SSH_REMOTE_HOST
           REMOTE_USER: $SSH_REMOTE_USER
           SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+          # 其实只需要执行命令，无需 rsync 同步待部署文件，但是 ssh-deploy 插件中没有选项可以关闭 rsync，故同步一个小文件得了。
+          SOURCE: 'dist/index.html'
+          TARGET: '/tmp/dist'
           SCRIPT_AFTER: |
             cd /opt/qf-miscellany/docker/sparklee/my-abc
             docker compose up -d --pull always
