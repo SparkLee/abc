@@ -1,4 +1,4 @@
-name: Publish to Docker Hub and Deploy to Tencent Cloud Server
+name: Publish to Docker Hub and Deploy to Server
 
 on:
   workflow_run:
@@ -8,6 +8,9 @@ on:
 
 env:
   DOCKERHUB_PAT: ${{ secrets.DOCKERHUB_PERSONAL_ACCESS_TOKEN }}
+  SSH_REMOTE_HOST: ${{ secrets.SSH_REMOTE_HOST }}
+  SSH_REMOTE_USER: ${{ secrets.SSH_REMOTE_USER }}
+  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_114_132_232_154 }}
 
 jobs:
   publish:
@@ -35,3 +38,19 @@ jobs:
         run: |
           docker login -u sparklee -p $DOCKERHUB_PAT
           docker push sparklee/abc:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: publish
+    steps:
+      # https://github.com/marketplace/actions/ssh-deploy
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v5.1.0
+        with:
+          REMOTE_HOST: $SSH_REMOTE_HOST
+          REMOTE_USER: $SSH_REMOTE_USER
+          SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+          SCRIPT_AFTER: |
+            cd /opt/qf-miscellany/docker/sparklee/my-abc
+            docker compose up -d --pull always
+            docker image prune -f
