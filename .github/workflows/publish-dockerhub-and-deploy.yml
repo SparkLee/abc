@@ -1,0 +1,35 @@
+name: Publish to Docker Hub and Deploy to Tencent Cloud Server
+
+on:
+  workflow_run:
+    workflows: ["Build and Upload Artifacts"]
+    #workflows: ["我依赖是一个不存在的 workflow 完成后才执行，用此方法禁用本 workflow！"]
+    types: [completed]
+
+env:
+  DOCKERHUB_PAT: ${{ secrets.DOCKERHUB_PERSONAL_ACCESS_TOKEN }}
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          # 若要下载其他workflow或其他仓库的artifact则必须指定github-token/run-id
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Build docker image
+        run: docker-compose -f docker/docker-compose.yml build
+
+      - name: Push docker image to Docker Hub
+        run: |
+          docker login -u sparklee -p $DOCKERHUB_PAT
+          docker push sparklee/abc:latest
