@@ -51,12 +51,11 @@ jobs:
           REMOTE_HOST: ${{ secrets.SSH_REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.SSH_REMOTE_USER }}
           # 其实只需要执行命令，无需 rsync 同步待部署文件，但是 ssh-deploy 插件中没有选项可以关闭 rsync，故同步一个小文件得了。
-          #SOURCE: 'index.html'
+          SOURCE: ''
           TARGET: '/tmp/dist'
           # Deployment Failed, Permission denied (publickey,password): This issue occures in some cases, it is related to OS and ssh.
           # This action can only provide a workaround: Use SCRIPT_BEFORE param, eg SCRIPT_BEFORE: ls. This will force known_hosts update
           # https://github.com/marketplace/actions/ssh-deploy#issues
-          SCRIPT_BEFORE: ls
           SCRIPT_AFTER: |
             cd /opt/qf-miscellany/docker/sparklee/my-abc
             docker compose up -d --pull always
