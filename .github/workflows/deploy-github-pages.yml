@@ -26,10 +26,13 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist/
+          # 若要下载其他workflow或其他仓库的artifact则必须指定github-token
+          github-token: ${{ github.token }}
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
