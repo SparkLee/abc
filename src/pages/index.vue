@@ -50,7 +50,7 @@
 import { ref } from 'vue'
 
 const drawer = ref(false)
-const items = ref(['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry'])
+const items = ref(['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry', 'Gutter'])
 const menus = ref([
   {
     title: 'Foo',
