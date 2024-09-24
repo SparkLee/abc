@@ -10,10 +10,7 @@
       </template>
     </v-app-bar>
 
-    <v-navigation-drawer
-      v-model="drawer"
-      temporary
-    >
+    <v-navigation-drawer v-model="drawer" temporary>
       <v-list :items="menus"></v-list>
     </v-navigation-drawer>
 
@@ -44,6 +41,12 @@
       </v-row>
     </v-main>
   </v-layout>
+
+  <v-footer class="d-flex flex-column">
+    <div class="w-100 px-4 py-2 bg-white text-center text-caption">
+      <a href="https://beian.miit.gov.cn/" target="_blank">湘ICP备2024085416号-1</a>
+    </div>
+  </v-footer>
 </template>
 
 <script lang="ts" setup>
