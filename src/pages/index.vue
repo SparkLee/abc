@@ -17,19 +17,19 @@
     <v-main style="min-height: 400px; margin: 30px;">
       <v-row>
         <v-col cols="12" md="4" v-for="(item, index) in items">
-          <v-card :title="(index + 1) + '. ' + item">
+          <v-card :title="(index + 1) + '. ' + item.text">
             <v-card-actions>
-              <v-btn @click.prevent="goToYouglish(item)" color="red" density="comfortable"
+              <v-btn @click.prevent="goToYouglish(item.text)" color="red" density="comfortable"
                      border="dashed thin" rounded="0">
                 <v-icon icon="mdi-video" size="small"></v-icon>
                 <span class="text-caption">看视频</span>
               </v-btn>
-              <v-btn @click.prevent="goToBingImg(item)" color="blue" density="comfortable"
+              <v-btn @click.prevent="goToBingImg(item.text)" color="blue" density="comfortable"
                      border="dashed thin" rounded="0">
                 <v-icon icon="mdi-image-area" size="small"></v-icon>
                 <span class="text-caption">看图片</span>
               </v-btn>
-              <v-btn @click.prevent="goToBaiduFanYi(item)" color="teal-lighten-2"
+              <v-btn @click.prevent="goToBaiduFanYi(item.text)" color="teal-lighten-2"
                      density="comfortable"
                      border="dashed thin" rounded="0">
                 <v-icon icon="mdi-library" size="small"></v-icon>
@@ -50,10 +50,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
 
+const http = axios.create({
+  baseURL: 'http://api.menghuanpaoying.cn'
+})
 const drawer = ref(false)
-const items = ref(['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry', 'Gutter'])
 const menus = ref([
   {
     title: 'Foo',
@@ -76,6 +79,14 @@ const menus = ref([
     value: 'buzz'
   }
 ])
+
+let items = ref()
+onMounted(() => {
+  http.get('/v1/words').then(function(resp) {
+    console.log(resp)
+    items.value = resp.data.words
+  })
+})
 
 function goToYouglish(content: string) {
   window.open('https://youglish.com/pronounce/' + encodeURIComponent(content) + '/english', '_blank')
