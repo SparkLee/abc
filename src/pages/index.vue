@@ -14,8 +14,8 @@
       <v-list :items="menus"></v-list>
     </v-navigation-drawer>
 
-    <v-main style="min-height: 400px; margin: 30px;">
-      <v-row>
+    <v-main class="pa-4 mt-16" min-height="50px">
+      <v-row dense>
         <v-col cols="12" md="4" v-for="(item, index) in items">
           <v-card :title="(index + 1) + '. ' + item.text">
             <v-card-actions>
