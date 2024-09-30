@@ -19,7 +19,7 @@
         <v-col cols="12" md="4" v-for="(item, index) in items">
           <v-card :title="(index + 1) + '. ' + item.text">
             <v-card-actions>
-              <v-btn @click.prevent="goToYouglish(item.text)" color="red" density="comfortable"
+              <v-btn @click.prevent="goToYouglish(item.text)" color="brown" density="comfortable"
                      border="dashed thin" rounded="0">
                 <v-icon icon="mdi-video" size="small"></v-icon>
                 <span class="text-caption">看视频</span>
@@ -35,6 +35,8 @@
                 <v-icon icon="mdi-library" size="small"></v-icon>
                 <span class="text-caption">查词典</span>
               </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn @click.prevent="del(item.id)" icon="mdi-delete" size="small" color="red"></v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -55,6 +57,7 @@ import axios from 'axios'
 
 const http = axios.create({
   baseURL: 'http://api.menghuanpaoying.cn'
+  // baseURL: 'http://localhost:18000'
 })
 const drawer = ref(false)
 const menus = ref([
@@ -98,5 +101,12 @@ function goToBingImg(content: string) {
 
 function goToBaiduFanYi(content: string) {
   window.open('https://fanyi.baidu.com/#en/zh/' + encodeURIComponent(content), '_blank')
+}
+
+function del(id: bigint) {
+  http.delete(`/v1/words/${id}`).then(function(resp){
+    console.log(resp)
+    items.value = items.value.filter((item: any) => item.id != id)
+  })
 }
 </script>
