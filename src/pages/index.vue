@@ -39,18 +39,24 @@
               <v-btn @click.prevent="goToYouglish(item.text)" color="brown" density="comfortable"
                      border="dashed thin" rounded="0">
                 <v-icon icon="mdi-video" size="small"></v-icon>
-                <span class="text-caption">看视频</span>
+                <span class="text-caption">视频</span>
               </v-btn>
               <v-btn @click.prevent="goToBingImg(item.text)" color="blue" density="comfortable"
                      border="dashed thin" rounded="0">
                 <v-icon icon="mdi-image-area" size="small"></v-icon>
-                <span class="text-caption">看图片</span>
+                <span class="text-caption">图片</span>
               </v-btn>
-              <v-btn @click.prevent="goToBaiduFanYi(item.text)" color="teal-lighten-2"
+              <v-btn @click.prevent="goToBaiduFanYi(item.text)" color="cyan"
                      density="comfortable"
                      border="dashed thin" rounded="0">
                 <v-icon icon="mdi-library" size="small"></v-icon>
-                <span class="text-caption">查词典</span>
+                <span class="text-caption">英语</span>
+              </v-btn>
+              <v-btn @click.prevent="goToZDic(item.text)" color="pink-lighten-3"
+                     density="comfortable"
+                     border="dashed thin" rounded="0">
+                <v-icon icon="mdi-library" size="small"></v-icon>
+                <span class="text-caption">中文</span>
               </v-btn>
               <v-spacer></v-spacer>
               <v-btn @click.prevent="delWord(item.id)" icon="mdi-delete" size="small" color="red"></v-btn>
@@ -124,6 +130,10 @@ function goToBingImg(content: string) {
 
 function goToBaiduFanYi(content: string) {
   window.open('https://fanyi.baidu.com/#en/zh/' + encodeURIComponent(content), '_blank')
+}
+
+function goToZDic(content: string) {
+  window.open('https://www.zdic.net/hans/' + encodeURIComponent(content), '_blank')
 }
 
 function addWord(text: string) {
