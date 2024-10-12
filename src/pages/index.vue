@@ -16,6 +16,23 @@
 
     <v-main class="pa-4 mt-16" min-height="50px">
       <v-row dense>
+        <v-col>
+          <v-text-field
+            clearable
+            single-line
+            label="请输入待添加的内容"
+            variant="solo"
+            density="compact"
+            hide-details="auto"
+            append-inner-icon="mdi-plus"
+            v-model="newWord"
+            @keyup.enter="addWord(newWord)"
+            @click:append-inner="addWord(newWord)"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+
+      <v-row dense>
         <v-col cols="12" md="4" v-for="(item, index) in items">
           <v-card :title="(index + 1) + '. ' + item.text">
             <v-card-actions>
@@ -36,7 +53,7 @@
                 <span class="text-caption">查词典</span>
               </v-btn>
               <v-spacer></v-spacer>
-              <v-btn @click.prevent="del(item.id)" icon="mdi-delete" size="small" color="red"></v-btn>
+              <v-btn @click.prevent="delWord(item.id)" icon="mdi-delete" size="small" color="red"></v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -52,8 +69,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { ref, Ref, onMounted } from 'vue'
 import axios from 'axios'
+
+interface Word {
+  id: bigint
+  text: string
+}
 
 const http = axios.create({
   baseURL: 'http://api.menghuanpaoying.cn'
@@ -82,8 +104,9 @@ const menus = ref([
     value: 'buzz'
   }
 ])
+const newWord: Ref<string> = ref('')
+const items: Ref<Word[]> = ref([])
 
-let items = ref()
 onMounted(() => {
   http.get('/v1/words').then(function(resp) {
     console.log(resp)
@@ -103,8 +126,16 @@ function goToBaiduFanYi(content: string) {
   window.open('https://fanyi.baidu.com/#en/zh/' + encodeURIComponent(content), '_blank')
 }
 
-function del(id: bigint) {
-  http.delete(`/v1/words/${id}`).then(function(resp){
+function addWord(text: string) {
+  http.post(`/v1/words`, { text: text }).then(function(resp) {
+    newWord.value = ''
+    console.log(resp)
+    items.value.unshift(resp.data.word)
+  })
+}
+
+function delWord(id: bigint) {
+  http.delete(`/v1/words/${id}`).then(function(resp) {
     console.log(resp)
     items.value = items.value.filter((item: any) => item.id != id)
   })
