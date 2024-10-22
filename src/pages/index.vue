@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, Ref, onMounted } from 'vue'
+import { onMounted, Ref, ref } from 'vue'
 import axios from 'axios'
 
 interface Word {
@@ -84,8 +84,7 @@ interface Word {
 }
 
 const http = axios.create({
-  baseURL: 'http://api.menghuanpaoying.cn'
-  // baseURL: 'http://localhost:18000'
+  baseURL: import.meta.env.VITE_API_BASE_URL
 })
 const drawer = ref(false)
 const menus = ref([
