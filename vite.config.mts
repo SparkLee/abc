@@ -67,11 +67,12 @@ export default defineConfig(({ command, mode }) => {
         '.mjs',
         '.ts',
         '.tsx',
-        '.vue',
-      ],
+        '.vue'
+      ]
     },
     server: {
-      port: env.VITE_SERVER_PORT
+      port: env.VITE_SERVER_PORT,
+      strictPort: true
     }
   }
 })
