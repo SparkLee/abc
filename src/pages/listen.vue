@@ -5,8 +5,9 @@
     </v-app-bar>
 
     <v-main class="pa-4 mt-16" min-height="50px">
-      <v-btn block variant="outlined" @click="startAgain">重新开始</v-btn>
-      <v-btn block variant="outlined" @click="playNext">播放下一个</v-btn>
+      <v-btn block stacked prepend-icon="mdi-reload" variant="outlined" @click="startAgain">重新开始</v-btn>
+      <br/>
+      <v-btn block stacked prepend-icon="mdi-skip-next-outline" variant="outlined" @click="playNext">播放下一个</v-btn>
     </v-main>
   </v-layout>
 
