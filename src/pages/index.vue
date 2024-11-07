@@ -7,10 +7,10 @@
     <v-main class="pa-4 mt-16" min-height="50px">
       <v-row align="center" justify="center">
         <v-col cols="auto">
-          <v-btn stacked variant="outlined" prepend-icon="mdi-file-word-box-outline" @click="router.push('/words')">单词</v-btn>
+          <v-btn stacked variant="outlined" prepend-icon="mdi-file-word-box-outline" @click="$router.push('/words')">单词</v-btn>
         </v-col>
         <v-col cols="auto">
-          <v-btn stacked variant="outlined" prepend-icon="mdi-ear-hearing" @click="router.push('/listen')">听写
+          <v-btn stacked variant="outlined" prepend-icon="mdi-ear-hearing" @click="$router.push('/listen')">听写
           </v-btn>
         </v-col>
       </v-row>
@@ -25,7 +25,4 @@
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
 </script>
