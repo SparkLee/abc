@@ -2,6 +2,9 @@
   <v-layout>
     <v-app-bar color="teal-lighten-3" comfortable>
       <v-toolbar-title>11 葡萄沟</v-toolbar-title>
+      <v-btn icon>
+        <v-icon @click="router.push('/')">mdi-home</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main class="pa-4 mt-16" min-height="50px">
@@ -15,6 +18,10 @@
 </template>
 
 <script lang="ts" setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 let index = 0
 const words = ['出产', '水果', '月份', '山坡', '枝叶', '展开', '五光十色', '好客']
 
