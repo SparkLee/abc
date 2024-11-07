@@ -5,17 +5,13 @@
     </v-app-bar>
 
     <v-main class="pa-4 mt-16" min-height="50px">
-      <v-btn block stacked prepend-icon="mdi-reload" variant="outlined" @click="startAgain">重新开始</v-btn>
-      <br/>
-      <v-btn block stacked prepend-icon="mdi-skip-next-outline" variant="outlined" @click="playNext">播放下一个</v-btn>
+      <v-btn block stacked variant="outlined" @click="startAgain">重新开始</v-btn>
+      <br />
+      <v-btn block stacked variant="outlined" @click="repeat">没听清，请再说一次</v-btn>
+      <br />
+      <v-btn block stacked variant="outlined" @click="playNext">听写下一个</v-btn>
     </v-main>
   </v-layout>
-
-  <v-footer class="d-flex flex-column">
-    <div class="w-100 px-4 py-2 bg-white text-center text-caption">
-      <a href="https://beian.miit.gov.cn/" target="_blank">湘ICP备2024085416号-1</a>
-    </div>
-  </v-footer>
 </template>
 
 <script lang="ts" setup>
@@ -24,7 +20,11 @@ const words = ['出产', '水果', '月份', '山坡', '枝叶', '展开', '五�
 
 function startAgain(): void {
   index = 0
-  play('准备好了，就点击“播放下一个”开始听写吧！')
+  play('准备好了，就点击“听写下一个”开始听写吧！')
+}
+
+function repeat(): void {
+  play(words[index - 1])
 }
 
 function playNext(): void {
