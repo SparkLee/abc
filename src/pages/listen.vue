@@ -24,6 +24,9 @@ function startAgain(): void {
 }
 
 function repeat(): void {
+  if (index === 0) {
+    return startAgain()
+  }
   play(words[index - 1])
 }
 
