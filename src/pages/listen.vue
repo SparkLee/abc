@@ -5,11 +5,11 @@
     </v-app-bar>
 
     <v-main class="pa-4 mt-16" min-height="50px">
-      <v-btn block stacked variant="outlined" @click="startAgain">重新开始</v-btn>
+      <v-btn block stacked variant="elevated" color="red" @click="startAgain">重新开始</v-btn>
       <br />
-      <v-btn block stacked variant="outlined" @click="repeat">没听清，请再说一次</v-btn>
+      <v-btn block stacked variant="outlined" color="warning" @click="repeat">没听清，请再说一次</v-btn>
       <br />
-      <v-btn block stacked variant="outlined" @click="playNext">听写下一个</v-btn>
+      <v-btn block stacked variant="elevated" color="green" @click="playNext">听写下一个</v-btn>
     </v-main>
   </v-layout>
 </template>
