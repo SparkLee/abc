@@ -49,7 +49,7 @@ function playNext(): void {
 function play(text: string): void {
   // text = '<speak><s>胜<phoneme alphabet="py" ph="di4">地</phoneme></s></speak>'
   text = encodeURIComponent(text)
-  const audio = new Audio('https://nls-gateway.aliyuncs.com/stream/v1/tts?appkey=hzu1IYKCtKAgo7ko&token=3b65c22dfdee4fb493bacc966706e27b&text=' + text + '&format=wav&voice=ruilin')
+  const audio = new Audio('https://nls-gateway.aliyuncs.com/stream/v1/tts?appkey=hzu1IYKCtKAgo7ko&token=21ad070ea19247e488a389fb6c6c82aa&text=' + text + '&format=wav&voice=ruilin')
   audio.play()
 }
 </script>
