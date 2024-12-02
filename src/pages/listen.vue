@@ -51,6 +51,9 @@ function play(text: string): void {
   text = encodeURIComponent(text)
   const audio = new Audio('https://nls-gateway.aliyuncs.com/stream/v1/tts?appkey=hzu1IYKCtKAgo7ko&token=c4afc79391c64b429e651feaccb1f644&text=' + text + '&format=wav&voice=ruilin')
   audio.play()
+    .catch((e) => {
+      alert('audio.play() err: ' + e.message)
+    })
 }
 </script>
 
