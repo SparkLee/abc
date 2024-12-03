@@ -47,14 +47,12 @@ function playNext(): void {
 }
 
 function play(text: string): void {
-  console.log("play: " + text)
   // text = '<speak><s>胜<phoneme alphabet="py" ph="di4">地</phoneme></s></speak>'
   text = encodeURIComponent(text)
-  const audio = new Audio('https://nls-gateway.aliyuncs.com/stream/v1/tts?appkey=hzu1IYKCtKAgo7ko&token=af04fc7698174e6b91e979710b0b522f&text=' + text + '&format=mp3&voice=ruilin')
-  audio.play()
-    .catch((e) => {
-      alert('audio.play() err: ' + e.message)
-    })
+  const audio = new Audio('https://nls-gateway.aliyuncs.com/stream/v1/tts?appkey=hzu1IYKCtKAgo7ko&token=af04fc7698174e6b91e979710b0b522f&text=' + text + '&voice=ruilin&format=mp3')
+  audio.play().catch((e) => {
+    alert('audio.play() err: ' + e.message)
+  })
 }
 </script>
 
