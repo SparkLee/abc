@@ -19,8 +19,14 @@
 
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
+import axios from 'axios'
+import { ref, Ref } from 'vue'
 
+const token: Ref<string> = ref('')
 const router = useRouter()
+const http = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL
+})
 
 let index = 0
 const words = [
@@ -28,6 +34,14 @@ const words = [
   '道路', '报道', '跑道', '朗朗上口', '阵地', '阵雨', '阵脚', '明朗', '干枯', '枯树', '了却', '将心比心', '冷却', '第一', '门第', '将要', '难过',
   '难道', '纷纷', '一言难尽'
 ]
+
+onMounted(() => {
+  http.get(`/v1/aliyun/nls/token`).then(function(resp) {
+    token.value = resp.data.token
+  }).catch(function(e) {
+    alert('getToken err: ' + e.message)
+  })
+})
 
 function startAgain(): void {
   index = 0
@@ -49,11 +63,12 @@ function playNext(): void {
 function play(text: string): void {
   // text = '<speak><s>胜<phoneme alphabet="py" ph="di4">地</phoneme></s></speak>'
   text = encodeURIComponent(text)
-  const audio = new Audio('https://nls-gateway.aliyuncs.com/stream/v1/tts?appkey=hzu1IYKCtKAgo7ko&token=af04fc7698174e6b91e979710b0b522f&text=' + text + '&voice=ruilin&format=mp3')
+  const audio = new Audio('https://nls-gateway.aliyuncs.com/stream/v1/tts?appkey=hzu1IYKCtKAgo7ko&token=' + token.value + '&text=' + text + '&voice=ruilin&format=mp3')
   audio.play().catch((e) => {
     alert('audio.play() err: ' + e.message)
   })
 }
+
 </script>
 
 <style scoped lang="sass">
